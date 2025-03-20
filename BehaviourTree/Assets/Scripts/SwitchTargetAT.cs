@@ -21,7 +21,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 			currPatrolIndex++;
-            if (currPatrolIndex > patrolPoints.Length)
+            if (currPatrolIndex >= patrolPoints.Length)
             {
 				currPatrolIndex = 0;
             }
