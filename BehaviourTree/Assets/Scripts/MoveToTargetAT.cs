@@ -7,7 +7,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 	public class MoveToTargetAT : ActionTask {
 		public BBParameter<Transform> currTarget;
-		public float speed;
+		public BBParameter<float> speed;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
@@ -20,7 +20,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 			Vector3 moveDir = currTarget.value.position - agent.transform.position;
-			agent.transform.position += moveDir.normalized * speed * Time.deltaTime;
+			agent.transform.position += moveDir.normalized * speed.value * Time.deltaTime;
 
 			EndAction(true);
 		}

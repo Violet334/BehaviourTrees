@@ -7,6 +7,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 	public class SwitchTargetAT : ActionTask {
 		public BBParameter<Transform> currTarget;
+		public BBParameter<float> speed;
 		public Transform[] patrolPoints;
 
 		int currPatrolIndex = 0;
@@ -20,6 +21,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
+			speed.value = 3;
 			currPatrolIndex++;
             if (currPatrolIndex >= patrolPoints.Length)
             {

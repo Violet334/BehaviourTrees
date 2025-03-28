@@ -9,6 +9,7 @@ namespace NodeCanvas.Tasks.Actions {
 	public class GroundChild : ActionTask {
 		public BBParameter<Transform> childPos;
 		public Transform groundedPos;
+		public Transform carryPos;
 
 		//create a delay timer
 		public float timer = 2;
@@ -18,9 +19,12 @@ namespace NodeCanvas.Tasks.Actions {
 		public Material material;
 
 		public TextMeshPro yelling;
-		//Use for initialization. This is called only once in the lifetime of the task.
-		//Return null if init was successfull. Return an error string otherwise
-		protected override string OnInit() {
+
+        public BBParameter<Transform> target;
+		public BBParameter<float> speed;
+        //Use for initialization. This is called only once in the lifetime of the task.
+        //Return null if init was successfull. Return an error string otherwise
+        protected override string OnInit() {
 			return null;
 		}
 
@@ -37,9 +41,12 @@ namespace NodeCanvas.Tasks.Actions {
 			timer -= Time.deltaTime;
             if (timer <= 0)
             {
-				childPos.value.position = groundedPos.position;
+				//childPos.value.position = groundedPos.position;
 				yelling.text = "";
 				rend.material = defaultMaterial;
+				childPos.value.position = carryPos.position;
+				target.value = groundedPos;
+				speed.value = 2;
 				EndAction(true);
 			}
 			
