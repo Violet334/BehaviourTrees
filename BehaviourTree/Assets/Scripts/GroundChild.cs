@@ -32,7 +32,9 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
+			//turn red
 			rend.material = material;
+			//yell at child
 			yelling.text = "YOU ARE GROUNDED!!";
 		}
 
@@ -44,6 +46,8 @@ namespace NodeCanvas.Tasks.Actions {
 				//childPos.value.position = groundedPos.position;
 				yelling.text = "";
 				rend.material = defaultMaterial;
+
+				//lift child up and take them to their room
 				childPos.value.position = carryPos.position;
 				target.value = groundedPos;
 				speed.value = 2;
