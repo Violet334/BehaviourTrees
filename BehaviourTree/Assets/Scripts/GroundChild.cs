@@ -9,6 +9,7 @@ namespace NodeCanvas.Tasks.Actions {
 	public class GroundChild : ActionTask {
 		public BBParameter<Transform> childPos;
 		public Transform groundedPos;
+		public Transform childGrounded;
 		public Transform carryPos;
 
 		//create a delay timer
@@ -45,13 +46,23 @@ namespace NodeCanvas.Tasks.Actions {
             {
 				//childPos.value.position = groundedPos.position;
 				yelling.text = "";
-				rend.material = defaultMaterial;
 
 				//lift child up and take them to their room
 				childPos.value.position = carryPos.position;
 				target.value = groundedPos;
 				speed.value = 2;
-				EndAction(true);
+
+				//move to kid's room
+				Vector3 moveDir = target.value.position - agent.transform.position;
+				agent.transform.position += moveDir.normalized * speed.value * Time.deltaTime;
+
+				float targetDist = Vector3.Distance(agent.transform.position, target.value.position);
+                if (targetDist < 0.1)
+                {
+					rend.material = defaultMaterial;
+					childPos.value.position = childGrounded.position;
+					EndAction(true);
+                }
 			}
 			
 		}
