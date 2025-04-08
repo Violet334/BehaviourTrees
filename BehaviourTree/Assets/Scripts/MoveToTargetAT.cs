@@ -19,6 +19,8 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
+			//move to target location
+			//movement is hard coded and not optimal - others are nav agents
 			Vector3 moveDir = currTarget.value.position - agent.transform.position;
 			agent.transform.position += moveDir.normalized * speed.value * Time.deltaTime;
 

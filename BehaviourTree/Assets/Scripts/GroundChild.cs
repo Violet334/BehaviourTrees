@@ -59,6 +59,7 @@ namespace NodeCanvas.Tasks.Actions {
 				float targetDist = Vector3.Distance(agent.transform.position, target.value.position);
                 if (targetDist < 0.1)
                 {
+					//carry child to their room and move on
 					rend.material = defaultMaterial;
 					childPos.value.position = childGrounded.position;
 					EndAction(true);

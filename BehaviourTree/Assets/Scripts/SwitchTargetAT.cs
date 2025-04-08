@@ -29,7 +29,7 @@ namespace NodeCanvas.Tasks.Actions {
             {
 				currPatrolIndex = 0;
             }
-
+			//switch target to next patrol point
 			currTarget.value = patrolPoints[currPatrolIndex];
 			EndAction(true);
 		}
