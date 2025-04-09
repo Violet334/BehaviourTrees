@@ -1,21 +1,21 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+using TMPro;
 
 
 namespace NodeCanvas.Tasks.Actions {
 
-	public class TravelAT : ActionTask {
-		public Transform target;
-		public float radius;
+	public class YellAtChildAT : ActionTask {
+		public BBParameter<bool> callMom;
+		public TextMeshPro text;
 
-		private NavMeshAgent navAgent;
+		public Renderer rend;
+		public Material defaultMat;
+		public Material angry;
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
 		protected override string OnInit() {
-			navAgent = agent.GetComponent<NavMeshAgent>();
 			return null;
 		}
 
@@ -23,22 +23,23 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			
-			navAgent.SetDestination(target.position);
-		}
+            //turn red
+            rend.material = angry;
+            //yell for mom
+            text.text = "GERTRUDE! GET THE BRAT!!";
+			callMom.value = true;
+        }
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-			if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
-			{
-				EndAction(true);
-			}
+			
 		}
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-			
-		}
+			rend.material = defaultMat;
+			text.text = "";
+        }
 
 		//Called when the task is paused.
 		protected override void OnPause() {

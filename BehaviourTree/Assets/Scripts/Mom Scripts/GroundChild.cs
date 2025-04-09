@@ -23,6 +23,8 @@ namespace NodeCanvas.Tasks.Actions {
 
         public BBParameter<Transform> target;
 		public BBParameter<float> speed;
+
+		public BBParameter<bool> callMom;
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
         protected override string OnInit() {
@@ -70,7 +72,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//Called when the task is disabled.
 		protected override void OnStop() {
-			
+			callMom.value = false;
 		}
 
 		//Called when the task is paused.
